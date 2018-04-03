@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.wentao.cloud_note.dao.UserDao">
+
+
+<select id="findUserByName" parameterType="String"
+resultType="com.wentao.cloud_note.entity.User">
+SELECT CN_USER_ID AS ID,CN_USER_NAME AS NAME,CN_USER_PASSWORD AS PASSWORD,
+CN_USER_TOKEN AS TOKEN,CN_USER_NICK AS NICK 
+FROM CN_USER WHERE CN_USER_NAME=#{name}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+</select>
+
+<insert id="addUser" parameterType="com.wentao.cloud_note.entity.User">
+INSERT INTO CN_USER (CN_USER_ID,CN_USER_NAME,CN_USER_PASSWORD
+,CN_USER_TOKEN,CN_USER_NICK) 
+VALUES (
+#{id},#{name},#{password},#{token},#{nick})
+</insert>
+
+</mapper>
