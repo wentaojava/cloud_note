@@ -47,7 +47,7 @@ public class test {
 		String confirm="1234";
 		
 		UserService service=ctx.getBean("userService",UserService.class);
-		User user=service.regist(name, password,"", confirm,"");
+		User user=service.regist(name, password,"", confirm);
 		System.out.println(user);
 	}
 	

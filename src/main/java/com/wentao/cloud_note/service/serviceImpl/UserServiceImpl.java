@@ -24,16 +24,25 @@ import com.wentao.cloud_note.service.UserService;
  */
 @Service("userService")
 public class UserServiceImpl implements UserService{
-	//在配置文件里设置密码加密时的盐
+    /**
+	 * 在配置文件里设置密码加密时的盐
+	 *
+	 * */
 	@Value("#{jdbc.salt}")
 	private String salt;
 	
 	@Resource
 	private UserDao userDao;
 
-	/* 
-	 * 用户登录
-	 */
+	/**
+	*
+	* 用户登录
+	*
+	 * @param name
+	* @return
+	* @author wentao
+	* @time 2018年04月04日
+	*/
 	public User login(String name, String password) throws UserNotFoundException, PasswordException {
 		if(name==null || "".equals(name.trim())) {
 			throw new UserNotFoundException("请输入用户名");
@@ -53,10 +62,16 @@ public class UserServiceImpl implements UserService{
 		throw new PasswordException("密码错误");
 	}
 
-	/* 
-	 * 用户注册
-	 */
-	public User regist(String name, String password, String nick, String confirm,String token)
+	/**
+	*
+	* 用户注册
+	*
+	 * @param
+	* @return
+	* @author wentao
+	* @time 2018年04月04日
+	*/
+	public User regist(String name, String password, String nick, String confirm)
 			throws UserNameException, PasswordException {
 		if(name==null || "".equals(name.trim())) {
 			throw new UserNameException("用户名不能为空");
@@ -79,6 +94,7 @@ public class UserServiceImpl implements UserService{
 		}
 		String id=UUID.randomUUID().toString();
 	    password=DigestUtils.md5Hex(salt+password.trim());
+	    String token=null;
 		User user=new User(id,name,password,nick,token);
 		int result=userDao.addUser(user);
 		if(result!=1) {

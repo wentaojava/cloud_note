@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.wentao.cloud_note.dao.NoteBookDao">
+
+
+<select id="findNoteBookByUserId" parameterType="string"
+resultType="map">
+SELECT CN_NOTEBOOK_ID AS ID,CN_NOTEBOOK_NAME AS NAME
+FROM CN_NOTEBOOK WHERE CN_USER_ID=#{userId}
+ORDER BY CN_NOTEBOOK_CREATETIME DESC
+</select>
+
+
+</mapper>

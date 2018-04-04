@@ -28,7 +28,6 @@ public class UserController {
 	@ExceptionHandler(Exception.class)
 	@ResponseBody
 	public Object exceptionHandler(Exception e) {
-		//System.out.println("111");
 		return new JsonForResult(e);
 	}
 
@@ -41,8 +40,8 @@ public class UserController {
 	
 	@RequestMapping("/regist.do")
 	@ResponseBody
-	public Object regist(String name, String password, String nick, String confirm,String token) {
-		User user=userService.regist(name, password, nick, confirm, token);
+	public Object regist(String name, String password, String nick, String confirm) {
+		User user=userService.regist(name, password, nick, confirm);
 		return new JsonForResult(user);
 	}
 	

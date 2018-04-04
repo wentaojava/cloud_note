@@ -20,6 +20,6 @@ public interface UserService {
 	/**
 	 * 用户注册
 	 **/
-	User regist(String name,String password,String nick,String confirm,String token) throws UserNameException,PasswordException;
+	User regist(String name,String password,String nick,String confirm) throws UserNameException,PasswordException;
 
 }
