@@ -48,12 +48,14 @@ function loginAction(){
 		type:'post',
 		dataType:'json',
 		success:function(result){
-			console.log(result);
+			//console.log(result);
 			if(result.state==0){
 				//登录成功!
 				var user = result.data;
-				console.log(user);
+				//console.log(user);
 				//跳转到 edit.html
+                addCookie("userId",user.id);
+                console.log(getCookie("userId"));
 				location.href='edit.html';
 			}
 			if(result.state==1){

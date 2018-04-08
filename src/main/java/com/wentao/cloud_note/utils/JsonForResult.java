@@ -3,6 +3,7 @@
  */
 package com.wentao.cloud_note.utils;
 
+import com.wentao.cloud_note.exceptions.NoteBookException;
 import com.wentao.cloud_note.exceptions.PasswordException;
 import com.wentao.cloud_note.exceptions.UserNameException;
 import com.wentao.cloud_note.exceptions.UserNotFoundException;
@@ -15,6 +16,7 @@ public class JsonForResult {
 	private static final Integer SUCCESS=0;
 	private static final Integer USER_ERROR=1;
 	private static final Integer PASSWORD_ERROR=2;
+	private static final Integer NOTE_BOOK_ERROR=3;
 	private Integer state;
 	private String message;
 	private Object data;
@@ -35,6 +37,9 @@ public class JsonForResult {
 		if(e instanceof PasswordException) {
 			state=PASSWORD_ERROR;
 			}
+		if(e instanceof NoteBookException){
+			state=NOTE_BOOK_ERROR;
+		}
 		this.message=e.getMessage();
 		
 	}

@@ -7,7 +7,7 @@
 
 <select id="findNoteBookByUserId" parameterType="string"
 resultType="map">
-SELECT CN_NOTEBOOK_ID AS ID,CN_NOTEBOOK_NAME AS NAME
+SELECT CN_NOTEBOOK_ID AS id,CN_NOTEBOOK_NAME AS name
 FROM CN_NOTEBOOK WHERE CN_USER_ID=#{userId}
 ORDER BY CN_NOTEBOOK_CREATETIME DESC
 </select>

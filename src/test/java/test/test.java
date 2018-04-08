@@ -3,8 +3,11 @@
  */
 package test;
 
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
+import com.wentao.cloud_note.service.NoteBookService;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.After;
 import org.junit.Before;
@@ -41,20 +44,21 @@ public class test {
 	}
 	
 	@Test
-	public void test2() {
-		String name="demo123";
-		String password="123";
-		String confirm="1234";
-		
-		UserService service=ctx.getBean("userService",UserService.class);
-		User user=service.regist(name, password,"", confirm);
-		System.out.println(user);
+	public void testService() {
+		//String name="demo123";
+		//String password="123";
+		//String confirm="1234";
+		String userId= "52f9b276-38ee-447f-a3aa-0d54e7a736e4";
+		NoteBookService s=ctx.getBean("noteBookService",NoteBookService.class);
+		//User user=service.regist(name, password,"", confirm);
+        List<Map<String,Object>> n=s.findNoteBookByUserId(userId);
+		System.out.println(n);
 	}
 	
 	@Test
 	public void testMd5() {
 		String str="123";
-		String md5=DigestUtils.md5Hex(str);
+		String md5=DigestUtils.md5Hex("你好啊"+str);
 		System.out.println(md5);
 		
 	}
