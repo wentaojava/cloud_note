@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import javax.annotation.Resource;
 
+import com.wentao.cloud_note.utils.JsonForResult;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -101,6 +102,78 @@ public class UserServiceImpl implements UserService{
 			throw new RuntimeException("添加失败");
 		}
 		return user;
+	}
+
+	/**
+	 *
+	 * 根据id获取用户原密码
+	 *
+	 * @param id
+	 * @return
+	 * @author wentao
+	 * @time 2018年04月09日
+	 */
+	public Boolean findUserById(String id,String oldPwd) throws PasswordException {
+		User user;
+		if(id==null || "".equals(id)){
+			throw new PasswordException("用户Id不能为空");
+		}
+		if(oldPwd==null || "".equals(oldPwd)){
+			throw new PasswordException("原密码不能为空");
+		}
+		try{
+			user=userDao.findUserById(id);
+			//System.out.println("findUserById");
+		}catch (RuntimeException e){
+			throw new RuntimeException("查询失败");
+		}
+		if(user==null){
+			throw new PasswordException("查询不到用户信息");
+		}
+		String old=DigestUtils.md5Hex(salt+oldPwd);
+		if(!old.equals(user.getPassword())){
+			throw new PasswordException("原始密码错误");
+		}else{
+			return true;
+		}
+	}
+
+	/**
+	 *
+	 *根据id修改用户密码
+	 *
+	 * @param id
+	 * @param finalPwd
+	 * @param newPwd
+	 * @throws PasswordException
+	 * @return
+	 * @author wentao
+	 * @time 2018年04月09日
+	 */
+	public Boolean changePwdById(String id, String newPwd, String finalPwd) throws PasswordException {
+		if(id==null || "".equals(id)){
+			throw new PasswordException("用户Id不能为空");
+		}
+		if(newPwd==null || "".equals(newPwd)){
+			throw new PasswordException("新密码不能为空");
+		}
+		if(finalPwd==null || "".equals(finalPwd)){
+			throw new PasswordException("确认密码不能为空");
+		}
+		if(!newPwd.equals(finalPwd)){
+			throw new PasswordException("两次密码输入的不一致");
+		}
+		User user=new User();
+		user.setId(id);
+		user.setPassword(DigestUtils.md5Hex(salt+newPwd));
+		try{
+			userDao.changePwdById(user);
+			return true;
+		}catch (RuntimeException e){
+			throw new RuntimeException("更新失败");
+			//
+		}
+		//return false;
 	}
 
 }

@@ -56,7 +56,7 @@ function loginAction(){
 				//跳转到 edit.html
                 addCookie("userId",user.id);
                 console.log(getCookie("userId"));
-				location.href='edit.html';
+				location.href='../../edit.html';
 			}
 			if(result.state==1){
 				var msg = result.message;

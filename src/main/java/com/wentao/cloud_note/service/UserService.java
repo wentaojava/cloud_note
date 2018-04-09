@@ -22,4 +22,31 @@ public interface UserService {
 	 **/
 	User regist(String name,String password,String nick,String confirm) throws UserNameException,PasswordException;
 
+	/**
+	*
+	* 根据id获取用户原密码
+	*
+	 * @param id
+	 * @param oldPwd
+	 * @throws PasswordException
+	* @return
+	* @author wentao
+	* @time 2018年04月09日
+	*/
+	Boolean findUserById(String id,String oldPwd) throws PasswordException;
+
+	/**
+	*
+	*根据id修改用户密码
+	*
+	 * @param id
+	 * @param finalPwd
+	 * @param newPwd
+	 * @throws PasswordException
+	 * @return
+	* @author wentao
+	* @time 2018年04月09日
+	*/
+	Boolean changePwdById(String id,String newPwd,String finalPwd) throws PasswordException;
+
 }

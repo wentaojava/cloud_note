@@ -44,6 +44,20 @@ public class UserController {
 		User user=userService.regist(name, password, nick, confirm);
 		return new JsonForResult(user);
 	}
+
+	@RequestMapping("/checkOldPwd.do")
+	@ResponseBody
+	public Object findUserById(String id,String oldPwd){
+		Boolean result=userService.findUserById(id,oldPwd);
+		return new JsonForResult(result);
+	}
+
+	@RequestMapping("/changePwd.do")
+	@ResponseBody
+	public Object changePwdById(String id,String newPwd,String finalPwd){
+		Boolean result=userService.changePwdById(id,newPwd,finalPwd);
+		return new JsonForResult(result);
+	}
 	
 	
 

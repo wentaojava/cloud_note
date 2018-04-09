@@ -14,4 +14,8 @@ public interface UserDao {
 	
 	int addUser(User user);
 
+	User findUserById(String id);
+
+	void changePwdById(User user);
+
 }
