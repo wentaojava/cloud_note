@@ -50,7 +50,7 @@ function showNoteBook(book) {
     //var noteBook=book;
     //console.log(book.name);
     var li=$("<li class='online'>" + "<a id='" +
-       book.id+"' onclick='showNote();'><i class='fa fa-book' title='online' rel='tooltip-bottom'></i>"
+       book.id+"' onclick='showNote(this);'><i class='fa fa-book' title='online' rel='tooltip-bottom'></i>"
         + book.name+
         "</a></li>");
     //console.log(li);
@@ -58,8 +58,10 @@ function showNoteBook(book) {
 
 };
 
-function showNote(bookId) {
+function showNote(obj) {
     //var noteId=$(bookId.target).attr('id');
-    console.log($(this).html());
+    $('a').removeClass();
+    console.log(obj.id);
+    obj.setAttribute('class','checked');
 
 };
